@@ -4,8 +4,8 @@ import PySimpleGUI as psg
 import conversor
 
 frame_layout = [
-    [psg.Radio('Celsius -> Fahrenheit', 'GRUPO2', default=True, key='cel_fah', enable_events=True)], # Erro3
-    [psg.Radio('Fahrenheit -> Celsius', 'GRUPO1', key='cel_fah', enable_events=True)] # Erro4
+    [psg.Radio('Celsius -> Fahrenheit', 'GRUPO', default=True, key='cel_fah', enable_events=True)],
+    [psg.Radio('Fahrenheit -> Celsius', 'GRUPO', key='fah_cel', enable_events=True)]
 ]
 layout = [
     [psg.Text('Informe a temperatura em ºC: ', key='rotulo'), psg.InputText(key='temp'), psg.Frame('Opções: ', layout=frame_layout)],
@@ -29,15 +29,17 @@ while True:
 
     elif evento == 'Limpar':
         janela['temp'].update('')
-        # Erro5
+        janela['resultado'].update('')
         janela['temp'].set_focus()
-    else:
-        if valor['cel_fah']:
-            fah = conversor.cel_fah(float(valor['temp']))
-            # Erro6
-        else:
-            # Erro7
-            janela['resultado'].update('{:.2f} ºC'.format(cel))
+    elif evento == 'Converter':
+        try:
+            if valor['cel_fah']:
+                fah = conversor.cel_fah(float(valor['temp']))
+                janela['resultado'].update('{:.2f} ºF'.format(fah))
+            else:
+                cel = conversor.fah_cel(float(valor['temp']))
+                janela['resultado'].update('{:.2f} ºC'.format(cel))
+        except Exception as e:
+            janela['resultado'].update('Erro: valor inválido')
 
-        
 janela.close()
