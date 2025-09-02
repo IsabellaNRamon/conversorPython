@@ -8,6 +8,7 @@ def cel_fah(cel):
 def fah_cel(fah):
     return (fah - 32) * 5 / 9  # Correção
 
+
 # teste
 print(f'{0}ºC = {cel_fah(0)}ºF')
 print(f'{-40}ºC = {cel_fah(-40)}ºF')

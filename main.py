@@ -1,4 +1,4 @@
-# Interface simples
+# Simples interface 
 
 from conversor import cel_fah
 
